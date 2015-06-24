@@ -63,10 +63,19 @@ module Enumerable
 		storage
 	end
 
+	def my_inject(start=nil)
+		result = start == nil ? self.first : start
+		range = start == nil ? self.size - 1 : self.size
+		for i in self.last(range)
+			result = yield(result, i)
+		end
+		result
+	end
+
 
 end
 
 a = %w{water chestnut i think i smell a rat}
 b = [1, 2, 3, 4, 5, 6, 7]
 
-p b.my_map {|x| x*x}
+p b.my_inject {|x, t| t + x}
