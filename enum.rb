@@ -1,22 +1,45 @@
 module Enumerable
 	
 	def my_each
-		0.upto(self.length - 1) do |i|
-			yield self[i] if block_given?
+		0.upto(self.size - 1) do |i|
+			yield(self[i]) if block_given?
 		end
 		self
 	end
 
 	def my_each_with_index
-		0.upto(self.length - 1) do |i|
+		0.upto(self.size - 1) do |i|
 			yield self[i], i if block_given?
 		end
+		self
 	end
 
-	
+	def my_select
+		storage = []
+		for i in self
+			storage << i if yield(i)
+		end
+		storage
+	end
+
+	def my_all?
+		flag = true
+		for i in self
+			flag = false if !yield(i)
+		end
+		flag
+	end
+
+	def my_any?
+		flag = false
+		for i in self
+			flag = true if yield(i)
+		end
+		flag
+	end
+
 
 end
 
 a = %w{water chestnut i think i smell a rat}
 
-a.my_each_with_index {|b, i| puts "#{b} in narnia: #{i}"}
