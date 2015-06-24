@@ -55,8 +55,18 @@ module Enumerable
 		counter
 	end
 
+	def my_map
+		storage = []
+		for i in self
+			storage << yield(i) if block_given?
+		end
+		storage
+	end
+
 
 end
 
 a = %w{water chestnut i think i smell a rat}
+b = [1, 2, 3, 4, 5, 6, 7]
 
+p b.my_map {|x| x*x}
