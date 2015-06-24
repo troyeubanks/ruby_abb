@@ -38,6 +38,23 @@ module Enumerable
 		flag
 	end
 
+	def my_none?
+		flag = true
+		for i in self
+			flag = false if yield(i)
+		end
+		flag
+	end
+
+	def my_count
+		return self.size if !block_given?
+		counter = 0
+		for i in self
+			counter +=1 if yield(i)
+		end
+		counter
+	end
+
 
 end
 
